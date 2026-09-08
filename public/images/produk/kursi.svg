@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Kursi">
+  <rect width="400" height="400" fill="#f4f4f2"/>
+  <g fill="none" stroke="#1c1917" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M132 108h136v112H132z"/>
+    <path d="M116 220h168"/>
+    <path d="M140 224v72M260 224v72"/>
+    <path d="M132 140h136"/>
+  </g>
+</svg>

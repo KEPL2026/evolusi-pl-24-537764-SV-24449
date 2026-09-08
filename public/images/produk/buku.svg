@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Buku catatan">
+  <rect width="400" height="400" fill="#f4f4f2"/>
+  <g fill="none" stroke="#1c1917" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M136 112h128v176H136z"/>
+    <path d="M168 112v176"/>
+    <path d="M192 156h48M192 192h48"/>
+  </g>
+</svg>

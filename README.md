@@ -1,58 +1,224 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Ruang Rumah
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi web e-commerce sederhana untuk perabot rumah, dibangun dengan Laravel 13,
+Blade, dan Tailwind CSS 4.
 
-## About Laravel
+Fitur yang sudah ada:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Halaman beranda: hero, filter kategori, dan katalog 8 produk (data contoh di controller).
+- Autentikasi: daftar, masuk, keluar, dan halaman akun.
+- Pengujian otomatis (PHPUnit) dan pipeline CI GitHub Actions.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Kebutuhan sistem
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+| Kebutuhan | Versi |
+| --- | --- |
+| PHP | 8.3 atau lebih baru |
+| Composer | 2.x |
+| Node.js | 20 atau lebih baru |
+| Basis data | SQLite (bawaan) atau MySQL 8 |
 
-## Learning Laravel
+Ekstensi PHP yang dipakai: `mbstring`, `pdo_sqlite` (atau `pdo_mysql`), `intl`.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> **Pengguna Laragon/XAMPP di Windows.** Perintah `php` sering menunjuk ke PHP bawaan
+> XAMPP yang masih 8.2 sehingga muncul galat `Composer detected issues in your platform`.
+> Pakai terminal bawaan Laragon, atau tambahkan folder PHP 8.3 Laragon ke depan `PATH`:
+>
+> ```powershell
+> $env:Path = "C:\laragon\bin\php\php-8.3.16-Win32-vs16-x64;$env:Path"
+> php -v   # pastikan 8.3.x
+> ```
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Instalasi
 
 ```bash
-composer require laravel/boost --dev
+git clone https://github.com/AdityaZulkarnaen/evolusi-pl-24-537764-SV-24449.git
+cd evolusi-pl-24-537764-SV-24449
 
-php artisan boost:install
+composer install
+cp .env.example .env        # Windows PowerShell: copy .env.example .env
+php artisan key:generate
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+### Menyiapkan basis data
 
-## Contributing
+**SQLite (paling cepat, tanpa server basis data).** Pastikan `.env` berisi:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+DB_CONNECTION=sqlite
+```
 
-## Code of Conduct
+Lalu buat berkasnya dan jalankan migrasi:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```bash
+touch database/database.sqlite   # Windows PowerShell: New-Item database/database.sqlite
+php artisan migrate
+```
 
-## Security Vulnerabilities
+**MySQL.** Buat basis data kosong lebih dulu, lalu isi `.env`:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=ruang_rumah
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-## License
+```bash
+php artisan migrate
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Menyiapkan aset frontend
+
+```bash
+npm install
+npm run build     # sekali jalan, hasilnya dipakai server biasa
+```
+
+Saat mengembangkan tampilan, pakai mode pantau supaya perubahan Blade dan CSS langsung
+terlihat:
+
+```bash
+npm run dev
+```
+
+### Menjalankan aplikasi
+
+```bash
+php artisan serve
+```
+
+Buka http://127.0.0.1:8000.
+
+## Perintah harian
+
+| Perintah | Kegunaan |
+| --- | --- |
+| `php artisan serve` | Menjalankan server pengembangan |
+| `npm run dev` | Memantau perubahan aset frontend |
+| `npm run build` | Membangun aset untuk produksi |
+| `php artisan test` | Menjalankan seluruh pengujian |
+| `php artisan test --filter=AutentikasiTest` | Menjalankan satu berkas pengujian |
+| `vendor/bin/pint` | Merapikan gaya penulisan kode PHP |
+| `vendor/bin/pint --test` | Memeriksa gaya penulisan tanpa mengubah berkas |
+| `php artisan migrate:fresh` | Membangun ulang basis data dari nol |
+
+Aset hasil `npm run build` tidak ikut di-commit, jadi pengujian sengaja mematikan Vite
+lewat `withoutVite()` di `tests/TestCase.php`.
+
+## Struktur berkas utama
+
+```
+app/Http/Controllers/
+    BerandaController.php        katalog produk halaman depan
+    AkunController.php           halaman akun pengguna
+    Auth/PendaftaranController.php
+    Auth/SesiController.php      masuk dan keluar
+resources/views/
+    layouts/app.blade.php        kerangka halaman
+    partials/                    header dan footer
+    components/                  komponen Blade yang dipakai berulang
+    beranda.blade.php
+    akun.blade.php
+    auth/                        halaman masuk dan daftar
+routes/web.php                   seluruh rute aplikasi
+tests/Feature/                   pengujian halaman dan autentikasi
+.github/workflows/ci.yml         pipeline CI
+```
+
+## Alur kerja Git
+
+### Struktur branch
+
+| Branch | Peran |
+| --- | --- |
+| `main` | Versi stabil. Hanya menerima gabungan dari `dev`. |
+| `dev` | Branch integrasi. Semua fitur bermuara ke sini. |
+| `feat/...`, `fix/...` | Branch kerja untuk satu fitur atau satu perbaikan. |
+
+Repositori ini punya dua remote:
+
+| Remote | Alamat |
+| --- | --- |
+| `origin` | Repositori pribadi (`AdityaZulkarnaen/...`) |
+| `org` | Repositori organisasi (`KEPL2026/...`) |
+
+Periksa dengan `git remote -v`, dan sebutkan remote secara eksplisit saat push,
+misalnya `git push origin dev`.
+
+### Siklus mengerjakan satu tugas
+
+```bash
+# 1. Mulai dari dev yang terbaru
+git checkout dev
+git pull origin dev
+
+# 2. Buat branch kerja
+git checkout -b feat/keranjang-belanja
+
+# 3. Kerjakan, lalu periksa sebelum commit
+vendor/bin/pint
+php artisan test
+
+# 4. Commit perubahan
+git add .
+git commit -m "feat: tambah keranjang belanja"
+
+# 5. Dorong ke remote
+git push -u origin feat/keranjang-belanja
+```
+
+Setelah itu buka Pull Request dari `feat/keranjang-belanja` ke `dev` di GitHub,
+tunggu seluruh job CI hijau, baru minta review dan gabungkan. Menjelang rilis,
+`dev` digabungkan ke `main` lewat Pull Request tersendiri.
+
+### Penamaan commit
+
+Memakai format [Conventional Commits](https://www.conventionalcommits.org/):
+`<jenis>: <ringkasan singkat dengan huruf kecil>`.
+
+| Jenis | Dipakai untuk |
+| --- | --- |
+| `feat` | Fitur baru |
+| `fix` | Perbaikan bug |
+| `refactor` | Perubahan struktur kode tanpa mengubah perilaku |
+| `test` | Menambah atau memperbaiki pengujian |
+| `docs` | Perubahan dokumentasi |
+| `chore` | Perkakas, konfigurasi, dependensi |
+| `ci` | Perubahan pipeline CI |
+
+Contoh: `feat: tambah halaman detail produk`, `fix: perbaiki validasi email ganda`.
+
+### Menyelaraskan branch dengan dev
+
+Kalau `dev` sudah maju sementara branch kerja belum selesai:
+
+```bash
+git checkout dev
+git pull origin dev
+git checkout feat/keranjang-belanja
+git merge dev          # selesaikan konflik bila ada, lalu commit
+```
+
+### Aturan yang dipegang
+
+- Jangan commit langsung ke `main`.
+- Satu branch untuk satu tujuan; jangan campur fitur dan perbaikan dalam satu branch.
+- Jalankan `vendor/bin/pint` dan `php artisan test` sebelum push agar CI tidak merah.
+- Jangan pernah commit `.env`, `vendor/`, `node_modules/`, atau `public/build/`
+  semuanya sudah tercantum di `.gitignore`.
+
+## Integrasi berkelanjutan
+
+`.github/workflows/ci.yml` berjalan pada setiap push dan Pull Request, dan dapat pula
+dijalankan manual dari tab Actions. Isinya tiga job yang berjalan paralel:
+
+| Job | Isi |
+| --- | --- |
+| `lint` | `vendor/bin/pint --test` untuk memeriksa gaya penulisan kode |
+| `tests` | Menyiapkan `.env`, basis data SQLite, migrasi, lalu `php artisan test` |
+| `frontend` | `npm ci`, `npm run build`, memastikan manifest terbentuk, lalu mengunggah hasil build sebagai artifact |
+
+Pull Request baru boleh digabungkan setelah ketiga job hijau.
