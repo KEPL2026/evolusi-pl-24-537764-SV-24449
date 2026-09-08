@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Teko">
+  <rect width="400" height="400" fill="#f4f4f2"/>
+  <g fill="none" stroke="#1c1917" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M140 168h120v92a24 24 0 0 1-24 24h-72a24 24 0 0 1-24-24z"/>
+    <path d="M140 196l-40-36"/>
+    <path d="M260 192h26a26 26 0 0 1 0 52h-26"/>
+    <path d="M178 168v-24h44v24"/>
+  </g>
+</svg>

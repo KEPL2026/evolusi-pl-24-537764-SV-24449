@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Tanaman hias">
+  <rect width="400" height="400" fill="#f4f4f2"/>
+  <g fill="none" stroke="#1c1917" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M148 232h104l-14 60h-76z"/>
+    <path d="M200 232v-72"/>
+    <path d="M200 188c-8-30-30-44-56-44 0 30 22 50 56 52z"/>
+    <path d="M200 196c8-34 30-50 58-50 0 34-24 54-58 56z"/>
+  </g>
+</svg>
