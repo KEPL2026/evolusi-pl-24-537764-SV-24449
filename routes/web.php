@@ -4,9 +4,11 @@ use App\Http\Controllers\AkunController;
 use App\Http\Controllers\Auth\PendaftaranController;
 use App\Http\Controllers\Auth\SesiController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\TentangController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
 
 Route::middleware('guest')->group(function () {
     Route::get('/daftar', [PendaftaranController::class, 'create'])->name('register');

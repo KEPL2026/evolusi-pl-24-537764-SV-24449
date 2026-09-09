@@ -8,7 +8,7 @@
             <a href="{{ route('beranda') }}#produk" class="hover:text-neutral-900">Produk</a>
             <a href="{{ route('beranda') }}#produk" class="hover:text-neutral-900">Koleksi</a>
             <a href="{{ route('beranda') }}#layanan" class="hover:text-neutral-900">Layanan</a>
-            <a href="#" class="hover:text-neutral-900">Tentang</a>
+            <a href="{{ route('tentang') }}" class="hover:text-neutral-900">Tentang</a>
         </nav>
 
         <div class="flex items-center gap-6 text-sm">
